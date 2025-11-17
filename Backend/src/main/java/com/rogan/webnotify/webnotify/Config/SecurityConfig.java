@@ -39,6 +39,7 @@ public class SecurityConfig {
                                 "/ws/**",       // WebSocket
                                 "/app/**",
                                 "/topic/**",
+                                "/messages/**",
                                 "/user/**"
                         ).permitAll()
                         .anyRequest().authenticated()

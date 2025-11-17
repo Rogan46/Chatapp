@@ -2,15 +2,20 @@ package com.rogan.webnotify.webnotify.Controller;
 
 import com.rogan.webnotify.webnotify.Config.WebSocketEventListener;
 import com.rogan.webnotify.webnotify.Entity.Chatmessage;
-import jakarta.servlet.http.HttpServletRequest;
+import com.rogan.webnotify.webnotify.Entity.PrivateMessage;
+import com.rogan.webnotify.webnotify.Service.PrivateMessageService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,6 +24,8 @@ public class Chatcontroller {
     private SimpMessagingTemplate simpMessagingTemplate;
     @Autowired
     private WebSocketEventListener listener;
+    @Autowired
+    private PrivateMessageService ser;
 
     @MessageMapping("/user-status")
     @SendTo("/topic/public")
@@ -43,6 +50,12 @@ public class Chatcontroller {
 
     @MessageMapping("/private-message")
     public void sendPrivateMessage(Chatmessage message) {
+        PrivateMessage pm = new PrivateMessage();
+        pm.setSender(message.getSender());
+        pm.setReceiver(message.getReceiver());
+        pm.setContent(message.getContent());
+        ser.save(pm);
+
         System.out.printf("Private from %s → %s%n",
                 message.getSender(), message.getReceiver());
         simpMessagingTemplate.convertAndSendToUser(
@@ -51,15 +64,10 @@ public class Chatcontroller {
                 message
         );
     }
-//    @GetMapping("/api/hostinfo")
-//    public Map<String,String> hostInfo(HttpServletRequest req) {
-//        Map<String,String> m = new HashMap<>();
-//        m.put("host", req.getServerName()); // or compute InetAddress.getLocalHost().getHostAddress()
-//        m.put("port", String.valueOf(req.getServerPort()));
-//        return m;
-//    }
-
-    // ✅ Handle join and leave notifications
-
+    @GetMapping("/messages/{user1}/{user2}")
+    public List<PrivateMessage> getMessages(@PathVariable("user1") String user1,
+                                            @PathVariable("user2") String user2) {
+        return ser.getChatHistory(user1, user2);
+    }
 
 }
