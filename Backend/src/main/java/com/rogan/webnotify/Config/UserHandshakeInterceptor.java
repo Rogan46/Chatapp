@@ -1,4 +1,4 @@
-package com.rogan.webnotify.webnotify.Config;
+package com.rogan.webnotify.Config;
 
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;

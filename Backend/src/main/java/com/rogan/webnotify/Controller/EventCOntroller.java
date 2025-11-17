@@ -1,8 +1,8 @@
-package com.rogan.webnotify.webnotify.Controller;
+package com.rogan.webnotify.Controller;
 
 
-import com.rogan.webnotify.webnotify.Entity.Event;
-import com.rogan.webnotify.webnotify.Service.Eventservice;
+import com.rogan.webnotify.Entity.Event;
+import com.rogan.webnotify.Service.Eventservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

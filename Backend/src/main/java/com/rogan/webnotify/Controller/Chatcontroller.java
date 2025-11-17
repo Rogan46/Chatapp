@@ -1,9 +1,9 @@
-package com.rogan.webnotify.webnotify.Controller;
+package com.rogan.webnotify.Controller;
 
-import com.rogan.webnotify.webnotify.Config.WebSocketEventListener;
-import com.rogan.webnotify.webnotify.Entity.Chatmessage;
-import com.rogan.webnotify.webnotify.Entity.PrivateMessage;
-import com.rogan.webnotify.webnotify.Service.PrivateMessageService;
+import com.rogan.webnotify.Config.WebSocketEventListener;
+import com.rogan.webnotify.Entity.Chatmessage;
+import com.rogan.webnotify.Entity.PrivateMessage;
+import com.rogan.webnotify.Service.PrivateMessageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;

@@ -1,4 +1,4 @@
-package com.rogan.webnotify.webnotify.Config;
+package com.rogan.webnotify.Config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

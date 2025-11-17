@@ -1,4 +1,4 @@
-package com.rogan.webnotify.webnotify.Config;
+package com.rogan.webnotify.Config;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;

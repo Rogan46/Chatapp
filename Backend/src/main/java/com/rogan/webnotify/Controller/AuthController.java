@@ -1,7 +1,7 @@
-package com.rogan.webnotify.webnotify.Controller;
+package com.rogan.webnotify.Controller;
 
-import com.rogan.webnotify.webnotify.Entity.AppUser;
-import com.rogan.webnotify.webnotify.Repository.UserRepository;
+import com.rogan.webnotify.Entity.AppUser;
+import com.rogan.webnotify.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;

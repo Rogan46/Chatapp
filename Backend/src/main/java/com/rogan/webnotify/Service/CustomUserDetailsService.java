@@ -1,7 +1,7 @@
-package com.rogan.webnotify.webnotify.Service;
+package com.rogan.webnotify.Service;
 
-import com.rogan.webnotify.webnotify.Entity.AppUser;
-import com.rogan.webnotify.webnotify.Repository.UserRepository;
+import com.rogan.webnotify.Entity.AppUser;
+import com.rogan.webnotify.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;

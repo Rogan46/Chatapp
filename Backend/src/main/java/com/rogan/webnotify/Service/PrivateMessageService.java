@@ -1,7 +1,7 @@
-package com.rogan.webnotify.webnotify.Service;
+package com.rogan.webnotify.Service;
 
-import com.rogan.webnotify.webnotify.Entity.PrivateMessage;
-import com.rogan.webnotify.webnotify.Repository.PrivateMessageRepository;
+import com.rogan.webnotify.Entity.PrivateMessage;
+import com.rogan.webnotify.Repository.PrivateMessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

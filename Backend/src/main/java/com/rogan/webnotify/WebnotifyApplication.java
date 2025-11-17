@@ -1,4 +1,4 @@
-package com.rogan.webnotify.webnotify;
+package com.rogan.webnotify;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
-package com.rogan.webnotify.webnotify.Repository;
+package com.rogan.webnotify.Repository;
 
-import com.rogan.webnotify.webnotify.Entity.PrivateMessage;
+import com.rogan.webnotify.Entity.PrivateMessage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.rogan.webnotify.webnotify.Entity;
+package com.rogan.webnotify.Entity;
 
 import jakarta.persistence.*;
 

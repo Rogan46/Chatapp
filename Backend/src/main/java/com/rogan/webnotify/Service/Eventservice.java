@@ -1,8 +1,8 @@
-package com.rogan.webnotify.webnotify.Service;
+package com.rogan.webnotify.Service;
 
 
-import com.rogan.webnotify.webnotify.Entity.Event;
-import com.rogan.webnotify.webnotify.Repository.Eventrepo;
+import com.rogan.webnotify.Entity.Event;
+import com.rogan.webnotify.Repository.Eventrepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package com.rogan.webnotify.webnotify.Repository;
+package com.rogan.webnotify.Repository;
 
-import com.rogan.webnotify.webnotify.Entity.AppUser;
+import com.rogan.webnotify.Entity.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

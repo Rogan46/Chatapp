@@ -1,6 +1,6 @@
-package com.rogan.webnotify.webnotify.Config;
+package com.rogan.webnotify.Config;
 
-import com.rogan.webnotify.webnotify.Service.CustomUserDetailsService;
+import com.rogan.webnotify.Service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
