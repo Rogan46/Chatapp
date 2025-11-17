@@ -4,27 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79bdaee4-183b-4634-9e4e-e17c2e3556f6" name="Changes" comment="">
+    <list default="true" id="79bdaee4-183b-4634-9e4e-e17c2e3556f6" name="Changes" comment="Added Storage in database to store previous chat history">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/logo512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/ChatRoom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/ChatRoom.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/JoinPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/SigninPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/SignupPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/.idea/compiler.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/.idea/encodings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/.idea/jarRepositories.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/ngrok.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Controller/Chatcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Controller/Chatcontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/App.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/setupTests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +50,14 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Roganfullstack" />
+        <entry key="$PROJECT_DIR$/frontend/frontend" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -61,6 +78,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -69,21 +89,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Application.executor&quot;: &quot;Run&quot;,
-    &quot;Application.WebnotifyApplication.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Project Protfolio/webnotify&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Application.executor": "Run",
+    "Application.WebnotifyApplication.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "full-project",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Project Protfolio/webnotify",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.rogan.webnotify.webnotify.Config" />
@@ -111,6 +131,23 @@
       <option name="presentableId" value="Default" />
       <updated>1762865794768</updated>
     </task>
+    <task id="LOCAL-00001" summary="Added Storage in database to store previous chat history">
+      <option name="closed" value="true" />
+      <created>1763374222410</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1763374222410</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added Storage in database to store previous chat history">
+      <option name="closed" value="true" />
+      <created>1763374286799</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1763374286799</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -118,10 +155,27 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Rogan-full" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initialize project using Create React App&#10;Initial commit - Chat App with Spring Boot &amp; React" />
+    <MESSAGE value="Added Storage in database to store previous chat history" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Storage in database to store previous chat history" />
   </component>
 </project>
