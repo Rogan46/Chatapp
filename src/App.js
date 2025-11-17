@@ -1,24 +1,75 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import ChatRoom from './ChatRoom';
+import SignupPage from './SignupPage';
+import SigninPage from './SigninPage';
 
 function App() {
+  const [username, setUsername] = useState("");
+  const [page, setPage] = useState("signin"); // signin | signup | chat
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      {page === "signup" && (
+        <SignupPage onSignupSuccess={() => setPage("signin")} />
+      )}
+
+      {page === "signin" && (
+        <SigninPage
+          onLoginSuccess={(username) => {
+            setUsername(username);
+            setPage("chat");
+          }}
+        />
+      )}
+
+      {page === "chat" && <ChatRoom username={username} />}
+
+      {/* bottom link to switch between signup and signin */}
+      {page !== "chat" && (
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "20px",
+            fontFamily: "Arial",
+            fontSize: "14px",
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          {page === "signin" ? (
+            <>
+              Don’t have an account?{" "}
+              <button
+                style={{
+                  border: "none",
+                  background: "none",
+                  color: "#2563eb",
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                }}
+                onClick={() => setPage("signup")}
+              >
+                Sign Up
+              </button>
+            </>
+          ) : (
+            <>
+              Already have an account?{" "}
+              <button
+                style={{
+                  border: "none",
+                  background: "none",
+                  color: "#2563eb",
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                }}
+                onClick={() => setPage("signin")}
+              >
+                Sign In
+              </button>
+            </>
+          )}
+        </div>
+      )}
+    </>
   );
 }
 
