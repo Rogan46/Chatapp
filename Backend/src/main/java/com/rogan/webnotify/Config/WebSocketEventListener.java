@@ -35,4 +35,9 @@ public class WebSocketEventListener {
             onlineUsers.remove(username);
             template.convertAndSend("/topic/users", onlineUsers);
         }
-    }}
+    }
+
+    public boolean isOnline(String username) {
+        return onlineUsers.contains(username);
+    }
+}

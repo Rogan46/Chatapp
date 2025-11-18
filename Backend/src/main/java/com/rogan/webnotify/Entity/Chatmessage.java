@@ -27,6 +27,8 @@ public class Chatmessage {
 
     private LocalDateTime timestamp = LocalDateTime.now();
 
+
+
     public Long getId() {
         return id;
     }
@@ -82,4 +84,6 @@ public class Chatmessage {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
+
+
 }

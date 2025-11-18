@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "*") // allow from frontend
@@ -27,6 +29,14 @@ public class AuthController {
         userRepository.save(user);
         return "✅ User registered successfully";
     }
+    @GetMapping("/users")
+    public List<String> getAllUsers() {
+        return userRepository.findAll()
+                .stream()
+                .map(AppUser::getUsername)
+                .toList();
+    }
+
 
     // 🔹 Signin
     @PostMapping("/signin")

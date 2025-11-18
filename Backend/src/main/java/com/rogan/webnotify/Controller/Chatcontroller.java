@@ -32,6 +32,27 @@ public class Chatcontroller {
     public Chatmessage userStatus(Chatmessage message) {
         if ("JOIN".equals(message.getType())) {
             listener.addUser(message.getSender());
+            List<PrivateMessage> pending = ser.getUndeliveredMessages(message.getSender());
+
+            for (PrivateMessage p : pending) {
+                Chatmessage chatMsg = new Chatmessage();
+                chatMsg.setSender(p.getSender());
+                chatMsg.setReceiver(p.getReceiver());
+                chatMsg.setContent(p.getContent());
+                chatMsg.setType("CHAT");
+                // Send message to WebSocket queue
+                simpMessagingTemplate.convertAndSendToUser(
+                        message.getSender(),
+                        "/queue/messages",
+                        chatMsg
+
+                );
+
+                // Mark as delivered
+                p.setDelivered(true);
+                ser.save(p);
+            }
+
         }
         else if ("LEAVE".equals(message.getType())) {
             listener.removeUser(message.getSender());
@@ -54,6 +75,7 @@ public class Chatcontroller {
         pm.setSender(message.getSender());
         pm.setReceiver(message.getReceiver());
         pm.setContent(message.getContent());
+        pm.setDelivered(listener.isOnline(message.getReceiver()));
         ser.save(pm);
 
         System.out.printf("Private from %s → %s%n",
@@ -63,6 +85,13 @@ public class Chatcontroller {
                 "/queue/messages",
                 message
         );
+        if (listener.isOnline(message.getReceiver())) {
+            simpMessagingTemplate.convertAndSendToUser(
+                    message.getReceiver(),
+                    "/queue/messages",
+                    message
+            );
+        }
     }
     @GetMapping("/messages/{user1}/{user2}")
     public List<PrivateMessage> getMessages(@PathVariable("user1") String user1,

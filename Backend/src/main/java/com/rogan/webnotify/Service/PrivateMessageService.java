@@ -21,4 +21,8 @@ public class PrivateMessageService {
         return repo.findBySenderAndReceiverOrReceiverAndSender(user1, user2, user1, user2);
 
     }
+
+    public List<PrivateMessage> getUndeliveredMessages(String user) {
+        return repo.findByReceiverAndDelivered(user, false);
+    }
 }

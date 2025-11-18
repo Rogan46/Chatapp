@@ -16,6 +16,16 @@ public class PrivateMessage {
     private String receiver;
     private String content;
 
+    private boolean delivered = false;
+
+    public boolean isDelivered() {
+        return delivered;
+    }
+
+    public void setDelivered(boolean delivered) {
+        this.delivered = delivered;
+    }
+
     public String getContent() {
         return content;
     }
@@ -29,7 +39,11 @@ public class PrivateMessage {
     public PrivateMessage() {
     }
 
-    public PrivateMessage(Long id, String sender, String receiver,String content, LocalDateTime timestamp) {
+    public PrivateMessage(boolean delivered) {
+        this.delivered = delivered;
+    }
+
+    public PrivateMessage(Long id, String sender, String receiver, String content, LocalDateTime timestamp) {
         this.id = id;
         this.sender = sender;
         this.receiver = receiver;

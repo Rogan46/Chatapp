@@ -10,4 +10,6 @@ import java.util.List;
 public interface PrivateMessageRepository extends JpaRepository< PrivateMessage,Long> {
 
     List<PrivateMessage> findBySenderAndReceiverOrReceiverAndSender(String sender,String receiver,String receiver2,String sender2);
+
+    List<PrivateMessage> findByReceiverAndDelivered(String receiver, boolean delivered);
 }
