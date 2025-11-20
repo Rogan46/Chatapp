@@ -4,7 +4,7 @@ import SockJS from "sockjs-client";
 import "./ChatRoom.css";
 import backendHost from "./Config";
 
-function ChatRoom({ username }) {
+function ChatRoom({ username ,onLogout}) {
   const [publicMsg, setPublicMsg] = useState("");
   const [privateMsg, setPrivateMsg] = useState("");
   const [publicMessages, setPublicMessages] = useState([]);
@@ -15,6 +15,7 @@ function ChatRoom({ username }) {
   const [connected, setConnected] = useState(false);
   const [userActivity, setUserActivity] = useState("");
   const [allUsers, setAllUsers] = useState([]);
+  const [unreadCounts, setUnreadCounts] = useState({});
 
   useEffect(() => {
     async function loadUsers() {
@@ -30,7 +31,7 @@ function ChatRoom({ username }) {
     loadUsers();
   }, []);  // ← runs only once on page load
 
-
+let client = null;
   useEffect(() => {
 
     if ("Notification" in window && Notification.permission === "default") {
@@ -43,9 +44,13 @@ function ChatRoom({ username }) {
 
     console.log(`Backend host: ${backendHost}`);
     console.log("✅ Backend Host:", backendHost);
+    if (stompClient) {
+    stompClient.deactivate();   // 🔥 cleanup previous connection
+  }
 
 
-    const client = new Client({
+
+     client = new Client({
       webSocketFactory: () => new SockJS(`${backendHost}/ws?username=${username}`),
       reconnectDelay: 5000,
 
@@ -72,20 +77,33 @@ function ChatRoom({ username }) {
         client.subscribe("/user/queue/messages", (payload) => {
           const msg = JSON.parse(payload.body);
           console.log("📌 Private message arrived:", msg);
-          if (Notification.permission === "granted" && msg.sender!==username) {
-            new Notification(`New Private Message ${msg.sender}`, {
-              body: msg.content
-            })
+          const fromUser = msg.sender;
+          const toUser = msg.receiver;
 
+          // 🔔 Show notification ONLY if it's actually sent to me AND not by me
+          if (toUser === username && fromUser !== username && Notification.permission === "granted") {
+            new Notification(`New Message from ${fromUser}`, {
+              body: msg.content,
+            });
           }
 
-          console.log("📩 Private:", msg);
+          // 💬 If this message belongs to the currently open chat, show in privateMessages
           setPrivateMessages((prev) =>
-            (msg.sender === selectedUser || msg.receiver === selectedUser)
+            (fromUser === selectedUser || toUser === selectedUser)
               ? [...prev, msg]
               : prev
           );
-          setTimeout(() => {
+
+          // 🔴 Unread count: if message is sent TO ME and I'm NOT currently viewing that user
+          if (toUser === username && fromUser !== selectedUser) {
+            setUnreadCounts((prev) => {
+  const current = prev[fromUser] || 0;
+  return {
+    ...prev,
+    [fromUser]: current + 1
+  };
+});
+          } setTimeout(() => {
             const list = document.querySelector(".messages-list");
             if (list) list.scrollTop = list.scrollHeight;
           }, 100);
@@ -125,7 +143,8 @@ function ChatRoom({ username }) {
     window.addEventListener("beforeunload", handleUnload);
     return () => {
       handleUnload();
-      client.deactivate();
+     
+  if (client) client.deactivate();
       window.removeEventListener("beforeunload", handleUnload);
     };
   }, [username]);
@@ -159,8 +178,12 @@ function ChatRoom({ username }) {
 
   };
   const loadHistory = async (user) => {
+    const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`${backendHost}/messages/${username}/${user}`);
+      const res = await fetch(`${backendHost}/messages/${username}/${user}`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }});
       if (!res.ok) {
         console.error("❌ History API error:", res.status);
         return;
@@ -179,26 +202,54 @@ function ChatRoom({ username }) {
         <div className="sidebar-header">🟢 Online Users</div>
 
         <div className="online-list">
-          {allUsers.map((user) => (
+          {allUsers.map((user) => {const count = unreadCounts[user] || 0;
+          return (
+            
             <div
               key={user}
               onClick={() => {
                 setSelectedUser(user);
                 loadHistory(user);
-              }}
-              className="online-item"
-              style={{ background: selectedUser === user ? "#e0e0e0" : undefined }}
-            >
-              {user === username ? `You (${user})` : user}
+                setUnreadCounts((prev) => ({ ...prev, [user]: 0 }));
 
-              <span style={{
-                color: onlineUsers.includes(user) ? "#0ea5a0" : "#ccc",
-                fontSize: 12
-              }}>
-                ●
-              </span>
+              }}
+               className="online-item"
+      style={{ background: selectedUser === user ? "#e0e0e0" : undefined }}
+    >
+      <span>
+        {user === username ? `You (${user})` : user}
+      </span>
+
+      <span style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+        {/* online dot */}
+        <span
+          style={{
+            color: onlineUsers.includes(user) ? "#0ea5a0" : "#ccc",
+            fontSize: 12,
+          }}
+        >
+          ●
+        </span>
+
+        {/* 🔴 unread badge */}
+        {count > 0 && (
+          <span
+            style={{
+              backgroundColor: "#ef4444",
+              color: "white",
+              borderRadius: "999px",
+              padding: "0 6px",
+              fontSize: "11px",
+              minWidth: "18px",
+              textAlign: "center",
+            }}
+          >
+            {count}
+          </span>
+        )}
+      </span>
             </div>
-          ))}
+          )})}
         </div>
 
         <div className="sidebar-footer">
@@ -207,12 +258,23 @@ function ChatRoom({ username }) {
           </div>
         </div>
       </aside>
+      
 
       {/* Main chat area */}
       <main className="main">
         <div className="topbar">
           <h2 style={{ margin: 0 }}>💬 Chat Room</h2>
           <div className="status-line">Status: {connected ? '🟢 Connected' : '🔴 Disconnected'} · Logged in as: <b>{username}</b></div>
+          <button
+  style={{ marginLeft: "20px" }}
+  onClick={() => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
+    window.location.reload();
+  }}
+>
+  Logout
+</button>
         </div>
 
 

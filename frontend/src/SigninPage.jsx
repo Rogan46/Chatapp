@@ -2,22 +2,36 @@ import React, { useState } from "react";
 import backendHost from "./Config.js";
 
 function SigninPage({ onLoginSuccess }) {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(()=>localStorage.getItem("username") || "");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSignin = async () => {
+     try {
     const res = await fetch(`${backendHost}/api/auth/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
     });
-    const text = await res.text();
-    setMsg(text);
-    if (text.includes("✅")) {
-      onLoginSuccess(username);
+     const raw = await res.text();
+    const token = raw.trim();   // remove spaces/newline
+
+    console.log("🔐 TOKEN RESPONSE: ", token);
+
+
+   if (token && !token.startsWith("❌")) {
+  localStorage.setItem("token", token);
+  localStorage.setItem("username", username.trim());
+  onLoginSuccess(username.trim());
+  } else {
+      setMsg("❌ Invalid username or password");
     }
+
+  } catch (err) {
+    console.error(err);
+    setMsg("❌ Login failed, server error");
+  }
   };
 
   return (

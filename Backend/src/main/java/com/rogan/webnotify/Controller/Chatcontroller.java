@@ -93,6 +93,10 @@ public class Chatcontroller {
             );
         }
     }
+    @GetMapping("/messages")
+    public String message(){
+        return "Good;";
+    }
     @GetMapping("/messages/{user1}/{user2}")
     public List<PrivateMessage> getMessages(@PathVariable("user1") String user1,
                                             @PathVariable("user2") String user2) {
