@@ -4,27 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79bdaee4-183b-4634-9e4e-e17c2e3556f6" name="Changes" comment="Added Storage in database to store previous chat history">
+    <list default="true" id="79bdaee4-183b-4634-9e4e-e17c2e3556f6" name="Changes" comment="Added Jwt for saving token and validate it for one hour">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Config/UserHandshakeHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Config/UserHandshakeInterceptor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Config/WebSocketEventListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Config/Websocketconfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Controller/AuthController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Controller/Chatcontroller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Controller/EventCOntroller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Entity/AppUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Entity/Chatmessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Entity/Event.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Entity/PrivateMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Repository/Eventrepo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Repository/PrivateMessageRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Repository/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Service/CustomUserDetailsService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Service/Eventservice.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/Service/PrivateMessageService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/rogan/webnotify/webnotify/WebnotifyApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/ChatRoom.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/ChatRoom.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,22 +68,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Application.executor": "Run",
-    "Application.WebnotifyApplication.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "full-project",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Project Protfolio/webnotify",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Application.executor&quot;: &quot;Run&quot;,
+    &quot;Application.WebnotifyApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;full-project&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Project Protfolio/webnotify&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.rogan.webnotify.webnotify.Config" />
@@ -161,7 +143,23 @@
       <option name="project" value="LOCAL" />
       <updated>1763376939593</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added Private chat history and also notification and offline message to other users">
+      <option name="closed" value="true" />
+      <created>1763445347590</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1763445347590</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added Jwt for saving token and validate it for one hour">
+      <option name="closed" value="true" />
+      <created>1763662471769</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1763662471769</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -190,6 +188,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initialize project using Create React App&#10;Initial commit - Chat App with Spring Boot &amp; React" />
     <MESSAGE value="Added Storage in database to store previous chat history" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Storage in database to store previous chat history" />
+    <MESSAGE value="Added Private chat history and also notification and offline message to other users" />
+    <MESSAGE value="Added Jwt for saving token and validate it for one hour" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Jwt for saving token and validate it for one hour" />
   </component>
 </project>

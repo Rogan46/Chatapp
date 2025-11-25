@@ -75,9 +75,9 @@ public class SecurityConfig {
         // 🧠 Smart CORS handling:
         // localhost and any 192.168.* LAN IP (auto covers Wi-Fi changes)
         configuration.setAllowedOriginPatterns(List.of(
-                "http://localhost:3000",
-                "http://127.0.0.1:3000",
-                "http://192.168.*:3000"
+                "http://localhost:*",
+                "http://127.0.0.1:*",
+                "http://192.168.*:*"
         ));
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));

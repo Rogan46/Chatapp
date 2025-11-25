@@ -57,7 +57,7 @@ let client = null;
       onConnect: () => {
         console.log("✅ Connected to WebSocket");
         setConnected(true);
-
+        
         client.subscribe("/topic/users", (payload) => {
           const users = JSON.parse(payload.body);
           setOnlineUsers(users);
