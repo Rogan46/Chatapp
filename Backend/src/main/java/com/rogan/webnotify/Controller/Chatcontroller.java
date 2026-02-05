@@ -1,0 +1,106 @@
+package com.rogan.webnotify.Controller;
+
+import com.rogan.webnotify.Config.WebSocketEventListener;
+import com.rogan.webnotify.Entity.Chatmessage;
+import com.rogan.webnotify.Entity.PrivateMessage;
+import com.rogan.webnotify.Service.PrivateMessageService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+public class Chatcontroller {
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
+    @Autowired
+    private WebSocketEventListener listener;
+    @Autowired
+    private PrivateMessageService ser;
+
+    @MessageMapping("/user-status")
+    @SendTo("/topic/public")
+    public Chatmessage userStatus(Chatmessage message) {
+        if ("JOIN".equals(message.getType())) {
+            listener.addUser(message.getSender());
+            List<PrivateMessage> pending = ser.getUndeliveredMessages(message.getSender());
+
+            for (PrivateMessage p : pending) {
+                Chatmessage chatMsg = new Chatmessage();
+                chatMsg.setSender(p.getSender());
+                chatMsg.setReceiver(p.getReceiver());
+                chatMsg.setContent(p.getContent());
+                chatMsg.setType("CHAT");
+                // Send message to WebSocket queue
+                simpMessagingTemplate.convertAndSendToUser(
+                        message.getSender(),
+                        "/queue/messages",
+                        chatMsg
+
+                );
+
+                // Mark as delivered
+                p.setDelivered(true);
+                ser.save(p);
+            }
+
+        }
+        else if ("LEAVE".equals(message.getType())) {
+            listener.removeUser(message.getSender());
+        }
+        return message;
+    }
+
+    // Public broadcast
+    @MessageMapping("/public-message")
+    @SendTo("/topic/public")
+    public Chatmessage sendPublicMessage(Chatmessage message) {
+
+        System.out.println("Public: " + message.getContent());
+        return message;
+    }
+
+    @MessageMapping("/private-message")
+    public void sendPrivateMessage(Chatmessage message) {
+        PrivateMessage pm = new PrivateMessage();
+        pm.setSender(message.getSender());
+        pm.setReceiver(message.getReceiver());
+        pm.setContent(message.getContent());
+        pm.setDelivered(listener.isOnline(message.getReceiver()));
+        ser.save(pm);
+
+        System.out.printf("Private from %s → %s%n",
+                message.getSender(), message.getReceiver());
+        simpMessagingTemplate.convertAndSendToUser(
+                message.getReceiver(),
+                "/queue/messages",
+                message
+        );
+        if (listener.isOnline(message.getReceiver())) {
+            simpMessagingTemplate.convertAndSendToUser(
+                    message.getReceiver(),
+                    "/queue/messages",
+                    message
+            );
+        }
+    }
+    @GetMapping("/messages")
+    public String message(){
+        return "Good;";
+    }
+    @GetMapping("/messages/{user1}/{user2}")
+    public List<PrivateMessage> getMessages(@PathVariable("user1") String user1,
+                                            @PathVariable("user2") String user2) {
+        return ser.getChatHistory(user1, user2);
+    }
+
+}

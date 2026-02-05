@@ -1,0 +1,131 @@
+/* Layout for chat room: sidebar on left, main content to the right */
+.chat-container {
+  display: flex;
+  height: calc(100vh - 40px); /* leave some room for margins */
+  gap: 16px;
+  padding: 20px;
+  box-sizing: border-box;
+  background: #f5f7fb;
+}
+
+.sidebar {
+  width: 260px;
+  background: #ffffff;
+  border: 1px solid #e1e5ee;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar-header {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+}
+
+.online-list {
+  padding: 8px 12px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+
+.online-item {
+  padding: 8px 6px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  background: linear-gradient(90deg,#fbfdff,#ffffff);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.sidebar-footer div {
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar-footer div:empty {
+  opacity: 0;
+}
+
+.sidebar-footer div:not(:empty) {
+  opacity: 1;
+  transform: translateY(0);
+}
+.main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  margin-bottom: 10px;
+}
+
+.panels {
+  display: flex;
+  gap: 12px;
+  flex: 1 1 auto;
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid #e1e5ee;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  overflow: hidden;
+}
+
+.panel-header {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+}
+
+.messages-list {
+   padding: 10px;
+  overflow-y: auto;            /* enable internal scroll */
+  flex: 1 1 auto;
+  height: 350px;               /* fixed height */
+}
+
+.panel-inputs {
+  padding: 8px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.panel-inputs input[type="text"] {
+  flex: 1 1 auto;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.panel-inputs button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+}
+
+.status-line {
+  font-size: 13px;
+  color: #444;
+}
+
+/* small responsive tweak */
+@media (max-width: 800px) {
+  .chat-container { flex-direction: column; height: auto; }
+  .sidebar { width: 100%; order: 2; }
+  .panels { flex-direction: column; }
+}
