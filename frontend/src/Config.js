@@ -1,5 +1,2 @@
-const backendHost =
-  import.meta.env.VITE_BACKEND_URL ||
-  `${window.location.protocol}//${window.location.hostname}:8080`;
-
+const backendHost = "http://136.115.223.35:8080";
 export default backendHost;
